@@ -30,14 +30,25 @@ def word_count_map(doc):
     Params:
       doc....a string to be split into tokens. split on whitespace.
     Returns:
-      a list of tuples of form (token, 1), where token is a whitespace delimited element of this string.
+      a list of tuples of form (token, 1), where token is a     whitespace delimited element of this string.
       
     E.g.
     >>> word_count_map('i am sam i am')
     [('i', 1), ('am', 1), ('sam', 1), ('i', 1), ('am', 1)]
+
     """
+  
+
     ###TODO
     
+    tokens = doc.split()
+    tokens_list = []
+
+    for token in tokens:
+      tokens_list.append((token, 1))
+      
+    
+    return tokens_list
     
 
 
@@ -54,10 +65,17 @@ def word_count_reduce(group):
     NOTE: you should use call the `reduce` function here.
     """
     ###TODO
-    
-    
+    if not isinstance(group[1], list):
+      group = (group[0], [group[1]])
 
+# Initialize total_count to a list containing the elements in list_of_ones
+    total_count = group[1]
 
+# Sum the counts in list_of_ones using the reduce function
+    total_count = reduce(plus, total_count, group[1])
+
+    return (group[0], total_count)
+  
 def iterate(f, x, a):
     # done. do not change me.
     """
@@ -123,4 +141,14 @@ def sentiment_map(doc,
     [('negative', 1), ('negative', 1)]
     """
     ###TODO
+    tokens = doc.split()
+
+    # Create a list of tuples for each instance of positive and         negative terms
+    pos_instances = [('positive', 1) for token in tokens if token in pos_terms]
+    neg_instances = [('negative', 1) for token in tokens if token in neg_terms]
+
+    # Combine the lists of instances
+    sentiment_instances = pos_instances + neg_instances
+
+    return sentiment_instances
 

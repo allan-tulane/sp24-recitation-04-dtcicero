@@ -1,6 +1,6 @@
 # CMPS 2200  Recitation 04
 
-**Name (Team Member 1):**_________________________  
+**Name (Team Member 1):** Daniel Cicero  
 **Name (Team Member 2):**_________________________
 
 
@@ -37,7 +37,8 @@ To use this function to count words, you'll need to implement your own `map_f` a
 4. Assume that a word `w` appears `n` times. What is the **work** and **span** of `word_count_reduce` for this word, assuming a parallel implementation of the `reduce` function?
 
 **Enter answer here**
-
+Work: O(n)
+Span: O(log n)
 
 5. Why are we going through all this trouble? Couldn't I just use this function to count words?
 
@@ -53,7 +54,7 @@ for doc in docs:
 What is the problem that prevents us from easily parallelizing this solution?
 
 **Enter answer here**
-
+This solution is sequential, and therefore not ideal for large input sizes. The main problem that prevents us from easily parallelizing this solution is that it is dependent on a current count value, which is consistently updated. Were this solution run on multiple processors in parallel, it would be impossible for them to tell what the current count was, and double counting would likely occur. This is in contrast to recursive parallel algorithms, which split a list into halves before counting so as to ensure a parallel algorithm is only concerned with its own half and not counting items that should be or already have been counted elsewhere. This algorithm is not specific enough about which processor should do what, and not consistent enough with its count value, to be augmented to a parallelized algorithm. 
 
 ## Part 2: Sentiment analysis
 
